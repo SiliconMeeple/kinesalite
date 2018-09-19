@@ -1,5 +1,5 @@
-var https = require('https'),
-    http = require('http'),
+var https = require('http-debug').https,
+    http = require('http-debug').http,
     fs = require('fs'),
     path = require('path'),
     url = require('url'),
@@ -64,6 +64,10 @@ function sendRaw(req, res, body, statusCode) {
   // AWS doesn't send a 'Connection' header but seems to use keep-alive behaviour
   // res.setHeader('Connection', '')
   // res.shouldKeepAlive = false
+
+  console.log("Received: " + req + " and responded with " + statusCode);
+  console.log(body);
+
   res.end(body)
 }
 
