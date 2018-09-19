@@ -1,5 +1,5 @@
-var https = require('http-debug').https,
-    http = require('http-debug').http,
+var https = require('https'),
+    http = require('http'),
     fs = require('fs'),
     path = require('path'),
     url = require('url'),
