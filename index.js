@@ -64,10 +64,8 @@ function sendRaw(req, res, body, statusCode) {
   // AWS doesn't send a 'Connection' header but seems to use keep-alive behaviour
   // res.setHeader('Connection', '')
   // res.shouldKeepAlive = false
-
-  console.log("Received: " + req + " and responded with " + statusCode);
-  console.log(body);
-
+  const { method, url, headers } = req
+  console.log("Received: " + method + " on " + url + " with headers" + headers + " and body " + req.rawbody + " then responded with " + statusCode + " and body " + body);
   res.end(body)
 }
 
@@ -119,6 +117,8 @@ function httpHandler(store, req, res) {
   req.on('end', function() {
 
     body = body ? body.toString() : ''
+
+    req.rawbody = body
 
     // All responses after this point have a RequestId
     res.setHeader('x-amzn-RequestId', uuid.v1())
